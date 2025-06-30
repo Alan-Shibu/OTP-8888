@@ -25,12 +25,12 @@
  *
  *
  *************************************************************************************/
-define(["N/log", "N/record", "N/search"], /**
+define(["N/log", "N/search"], 
+  /**
  * @param{log} log
- * @param{record} record
  * @param{search} search
  */
-function (log, record, search) {
+function (log, search) {
   /**
    * Validation function to be executed when record is saved.
    *
@@ -48,7 +48,7 @@ function (log, record, search) {
         return true;
       }
     } catch (e) {
-      console.log("Error caught", e.message);
+     log.error("Error caught", e.message);
     }
   }
 
@@ -65,7 +65,7 @@ function (log, record, search) {
       let salesOrderId = newRecord.getValue("createdfrom");
       let deposit;
       let statusArray = search.lookupFields({
-        type: record.Type.SALES_ORDER,
+        type: search.Type.SALES_ORDER,
         id: salesOrderId,
         columns: ["status", "applyingtransaction", "fxamount"],
       });
